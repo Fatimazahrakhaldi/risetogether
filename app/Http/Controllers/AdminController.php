@@ -543,7 +543,8 @@ class AdminController extends Controller {
 		$sql->finalized = $request->finalized;
 		$sql->status = $statusGlobal;
 		$sql->categories_id = $request->categories_id;
-		$sql->featured = $request->featured;
+        $featured = $request->has('featured') ? $request->input('featured') : '0';
+		$sql->featured = $featured;
 		$sql->save();
 
 		\Session::flash('success_message', trans('admin.success_update'));

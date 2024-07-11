@@ -181,12 +181,11 @@ return [
         Illuminate\Translation\TranslationServiceProvider::class,
         Illuminate\Validation\ValidationServiceProvider::class,
         Illuminate\View\ViewServiceProvider::class,
-        Mews\Purifier\PurifierServiceProvider::class,
 
-        // Intervention\Image\ImageServiceProvider::class,
-    	// 	Collective\Html\HtmlServiceProvider::class,
-    	// 	Laravel\Cashier\CashierServiceProvider::class,
-    	// 	Stevebauman\Purify\PurifyServiceProvider::class,
+        Intervention\Image\ImageServiceProvider::class,
+    	Collective\Html\HtmlServiceProvider::class,
+    	Laravel\Cashier\CashierServiceProvider::class,
+        Mews\Purifier\PurifierServiceProvider::class,
 
         /*
          * Application Service Providers...
@@ -247,13 +246,13 @@ return [
         'Validator' => Illuminate\Support\Facades\Validator::class,
         'View' => Illuminate\Support\Facades\View::class,
 
-        // 'Image' => Intervention\Image\Facades\Image::class,
-        // 'Form' => Collective\Html\FormFacade::class,
-        // 'Html' => Collective\Html\HtmlFacade::class,
-        // 'Purify' => Stevebauman\Purify\Facades\Purify::class,
-        // 'Paystack' => Unicodeveloper\Paystack\Facades\Paystack::class,
-        'PaymentGateways' => App\Models\PaymentGateways::class,
+        'Image' => Intervention\Image\Facades\Image::class,
+        'Form' => Collective\Html\FormFacade::class,
+        'Html' => Collective\Html\HtmlFacade::class,
         'Purify' => Mews\Purifier\Facades\Purifier::class,
+        'Paystack' => Unicodeveloper\Paystack\Facades\Paystack::class,
+        'PaymentGateways' => App\Models\PaymentGateways::class,
+
     ])->toArray(),
 
 ];
