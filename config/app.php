@@ -253,7 +253,7 @@ return [
         // 'Purify' => Stevebauman\Purify\Facades\Purify::class,
         // 'Paystack' => Unicodeveloper\Paystack\Facades\Paystack::class,
         'PaymentGateways' => App\Models\PaymentGateways::class,
-        'Purifier' => Mews\Purifier\Facades\Purifier::class,
+        'Purify' => Mews\Purifier\Facades\Purifier::class,
     ])->toArray(),
 
 ];
