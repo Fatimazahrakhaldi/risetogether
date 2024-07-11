@@ -181,6 +181,7 @@ return [
         Illuminate\Translation\TranslationServiceProvider::class,
         Illuminate\Validation\ValidationServiceProvider::class,
         Illuminate\View\ViewServiceProvider::class,
+        Mews\Purifier\PurifierServiceProvider::class,
 
         // Intervention\Image\ImageServiceProvider::class,
     	// 	Collective\Html\HtmlServiceProvider::class,
@@ -252,6 +253,7 @@ return [
         // 'Purify' => Stevebauman\Purify\Facades\Purify::class,
         // 'Paystack' => Unicodeveloper\Paystack\Facades\Paystack::class,
         'PaymentGateways' => App\Models\PaymentGateways::class,
+        'Purifier' => Mews\Purifier\Facades\Purifier::class,
     ])->toArray(),
 
 ];
