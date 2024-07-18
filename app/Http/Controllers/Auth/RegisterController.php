@@ -118,8 +118,18 @@ class RegisterController extends Controller
             'avatar' => 'default.jpg',
             'status' => $status,
             'role' => 'normal',
+            'remember_token' => str_random(60),
             'token' => $token,
-            'confirmation_code' => $confirmation_code
+            'confirmation_code' => $confirmation_code,
+            'paypal_account' => '',
+            'payment_gateway' => '',
+            'bank' => '',
+            'oauth_uid' => '',
+            'oauth_provider' => '',
+            'username' => '',
+            'phone' => 0,
+            'street' => '',
+
         ]);
     }
 

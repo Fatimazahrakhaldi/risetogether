@@ -80,7 +80,7 @@ class StripeController extends Controller
           "description" => $description,
           'confirmation_method' => 'manual',
           'confirm' => true,
-          'return_url' => "",
+          'return_url' => route('payment.completed'),
         ]);
       }
       if (isset($this->request->payment_intent_id)) {

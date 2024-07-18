@@ -437,7 +437,10 @@ Route::get('payment/paypal', 'PayPalController@show')->name('paypal');
 Route::get('payment/bank-transfer', 'BankTransferController@show')->name('bank-transfer');
 
 Route::get('payment/stripe', 'StripeController@show')->name('stripe');
-Route::post('payment/stripe/charge', 'StripeController@charge');
+Route::post('payment/stripe/charge', 'StripeController@charge')->name('payment.completed');
+
+// web.php (or api.php, depending on your setup)
+// Route::get('/payment/callback', [StripeController::class, 'handlePaymentCallback'])->name('payment.callback');
 
 Route::post("ajax/upload/image", "AjaxController@uploadImageEditor")->name("upload.image")->middleware("auth");
 Route::get("campaigns/latest","HomeController@campaignsLatest");
