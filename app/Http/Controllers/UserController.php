@@ -128,7 +128,7 @@ class UserController extends Controller
 		$allCampaigns = Campaigns::where('user_id',$id)->update(array('finalized' => '1'));
 
 		//<<<-- Delete Avatar -->>>/
-		$fileAvatar    = 'public/avatar/'.Auth::user()->avatar;
+		$fileAvatar    = 'avatar/'.Auth::user()->avatar;
 
 		if ( \File::exists($fileAvatar) && Auth::user()->avatar != 'default.jpg' ) {
 			 \File::delete($fileAvatar);
@@ -159,8 +159,8 @@ class UserController extends Controller
 		    }
 
 		// PATHS
-		$temp    = 'public/temp/';
-	    $path    = 'public/avatar/';
+		$temp    = 'temp/';
+	    $path    = 'avatar/';
 		$imgOld      = $path.Auth::user()->avatar;
 
 		 //<--- HASFILE PHOTO

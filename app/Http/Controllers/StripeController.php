@@ -79,7 +79,8 @@ class StripeController extends Controller
           'currency' => $currency_code,
           "description" => $description,
           'confirmation_method' => 'manual',
-          'confirm' => true
+          'confirm' => true,
+          'return_url' => "",
         ]);
       }
       if (isset($this->request->payment_intent_id)) {

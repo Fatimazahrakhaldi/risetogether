@@ -109,7 +109,7 @@ class AdminController extends Controller {
 		$allCampaigns = Campaigns::where('user_id',$id)->update(array('finalized' => '1'));
 
 		//<<<-- Delete Avatar -->>>/
-		$fileAvatar    = 'public/avatar/'.$user->avatar;
+		$fileAvatar    = 'avatar/'.$user->avatar;
 
 		if ( \File::exists($fileAvatar) && $user->avatar != 'default.jpg' ) {
 			 \File::delete($fileAvatar);
@@ -555,9 +555,9 @@ class AdminController extends Controller {
 
 		$data = Campaigns::findOrFail($request->id);
 
-		$path_small     = 'public/campaigns/small/';
-		$path_large     = 'public/campaigns/large/';
-		$path_updates = 'public/campaigns/updates/';
+		$path_small     = 'campaigns/small/';
+		$path_large     = 'campaigns/large/';
+		$path_updates = 'campaigns/updates/';
 
 		$updates = $data->updates()->get();
 
@@ -613,8 +613,8 @@ class AdminController extends Controller {
 
 	public function storeCategories(Request $request) {
 
-		$temp = 'public/temp/'; // Temp
-	  $path = 'public/img-category/'; // Path General
+		$temp = 'temp/'; // Temp
+	  $path = 'img-category/'; // Path General
 
 		Validator::extend('ascii_only', function($attribute, $value, $parameters){
     		return !preg_match('/[^x00-x7F\-]/i', $value);
@@ -683,8 +683,8 @@ else {
 
 
 		$categories = Categories::find($request->id);
-		$temp       = 'public/temp/'; // Temp
-	  $path       = 'public/img-category/'; // Path General
+		$temp       = 'temp/'; // Temp
+	  $path       = 'img-category/'; // Path General
 
 	    if (! isset($categories)) {
 			return redirect('panel/admin/categories');
@@ -750,7 +750,7 @@ else {
 	public function deleteCategories($id){
 
 		$categories        = Categories::find( $id );
-		$thumbnail          = 'public/img-category/'.$categories->image; // Path General
+		$thumbnail          = 'img-category/'.$categories->image; // Path General
 
 		if( !isset($categories) ) {
 			return redirect('panel/admin/categories');
@@ -847,10 +847,10 @@ else {
 
 	public function themeStore(Request $request) {
 
-		$temp  = 'public/temp/'; // Temp
-	  $path  = 'public/img/'; // Path
-		$pathAvatar = 'public/avatar/'; // Path
-		$pathCategory = 'public/img-category/'; // Path
+		$temp  = 'temp/'; // Temp
+	  $path  = 'img/'; // Path
+		$pathAvatar = 'avatar/'; // Path
+		$pathCategory = 'img-category/'; // Path
 
 		$rules = array(
           'logo'   => 'mimes:png',
@@ -992,8 +992,8 @@ else {
 
 	public function addGallery(Request $request)
 	{
-		$temp  = 'public/temp/'; // Temp
-	  $path  = 'public/gallery/'; // Path
+		$temp  = 'temp/'; // Temp
+	  $path  = 'gallery/'; // Path
 
 		$rules = array(
 					'image' => 'required|mimes:jpg,jpeg,png,gif|dimensions:min_width=1280',
@@ -1043,7 +1043,7 @@ else {
 	{
 		$image = Gallery::findOrFail($request->id);
 
-		$path = 'public/gallery/';
+		$path = 'gallery/';
 
 		//Delete
 		if (\File::exists($path.$image->image) ) {
@@ -1115,7 +1115,7 @@ else {
 				$request->file('upload')->move(public_path('blog'), $fileName);
 
         $CKEditorFuncNum = $request->input('CKEditorFuncNum');
-        $url = asset('public/blog/'.$fileName);
+        $url = asset('blog/'.$fileName);
         $msg = 'Image uploaded successfully';
         $response = "<script type='text/javascript'>window.parent.CKEDITOR.tools.callFunction($CKEditorFuncNum, '$url', '$msg');</script>";
 
@@ -1206,7 +1206,7 @@ else {
 		})->save($path);
 
 		// Delete Old Thumbnail
-		$pathDelete = 'public/blog/';
+		$pathDelete = 'blog/';
 		\File::delete($pathDelete.$data->image);
 
 		} // HasFile Image
@@ -1226,7 +1226,7 @@ else {
 	{
 		$data = Blogs::findOrFail($id);
 
-		$path = 'public/blog/';
+		$path = 'blog/';
 
 		// Delete Old Thumbnail
 		\File::delete($path.$data->image);
@@ -1250,7 +1250,7 @@ else {
 
 				\File::delete(env($key));
 
-				$envIcon = 'public/images/icons/' . $filename;
+				$envIcon = 'images/icons/' . $filename;
 				Helper::envUpdate($key, $envIcon);
 			}
 		}

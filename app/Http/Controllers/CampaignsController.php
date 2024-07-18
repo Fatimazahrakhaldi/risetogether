@@ -18,6 +18,7 @@ use App\Models\PaymentGateways;
 use App\Models\Like;
 use Image;
 use Mail;
+use Spatie\LaravelIgnition\Recorders\DumpRecorder\Dump;
 
 class CampaignsController extends Controller
 {
@@ -113,9 +114,9 @@ class CampaignsController extends Controller
 	public function create() {
 
 		// PATHS
-		$temp            = 'public/temp/';
-	  $path_small    = 'public/campaigns/small/';
-		$path_large   = 'public/campaigns/large/';
+		$temp            = 'temp/';
+	    $path_small    = 'campaigns/small/';
+		$path_large   = 'campaigns/large/';
 
 		$input      = $this->request->all();
 		$validator = $this->validator($input);
@@ -126,6 +127,7 @@ class CampaignsController extends Controller
 			        'errors' => $validator->getMessageBag()->toArray(),
 			    ]);
 	    } //<-- Validator
+        try {
 
 	    if( $this->request->hasFile('photo') )	{
 
@@ -156,7 +158,6 @@ class CampaignsController extends Controller
 
 				//=============== Small Large =================//
 				Helper::resizeImageFixed( $temp.$file_large, 400, 300, $temp.$file_small );
-
 				//======= Copy Folder Small and Delete...
 				if ( \File::exists($temp.$file_small) ) {
 					\File::copy($temp.$file_small, $path_small.$file_small);
@@ -223,7 +224,9 @@ class CampaignsController extends Controller
 				        'success' => true,
 				        'target' => $_target,
 				    ]);
-
+        } catch (\Exception $e) {
+            return response()->json(['success' => false, 'message' => $e->getMessage()], 500);
+        }
 	}//<<--- End Method
 
 
@@ -392,9 +395,9 @@ class CampaignsController extends Controller
 		}
 
 		// PATHS
-		$temp            = 'public/temp/';
-	    $path_small    = 'public/campaigns/small/';
-		$path_large   = 'public/campaigns/large/';
+		$temp            = 'temp/';
+	    $path_small    = 'campaigns/small/';
+		$path_large   = 'campaigns/large/';
 
 		// Old images
 		$old_small     = $path_small.$sql->small_image;
@@ -518,9 +521,9 @@ class CampaignsController extends Controller
 		->where('user_id', Auth::user()->id)
 		->firstOrFail();
 
-		$path_small     = 'public/campaigns/small/';
-		$path_large     = 'public/campaigns/large/';
-		$path_updates = 'public/campaigns/updates/';
+		$path_small     = 'campaigns/small/';
+		$path_large     = 'campaigns/large/';
+		$path_updates = 'campaigns/updates/';
 
 		$updates = $data->updates()->get();
 
@@ -571,8 +574,8 @@ class CampaignsController extends Controller
 	public function post_update(){
 
 		// PATHS
-		$temp   = 'public/temp/';
-		$path   = 'public/campaigns/updates/';
+		$temp   = 'temp/';
+		$path   = 'campaigns/updates/';
 
 		$sizeAllowed = $this->settings->file_size_allowed * 1024;
 		$dimensions = explode('x',$this->settings->min_width_height_image);
@@ -663,8 +666,8 @@ class CampaignsController extends Controller
 		$sql = Updates::find($this->request->id);
 
 		// PATHS
-		$temp   = 'public/temp/';
-		$path   = 'public/campaigns/updates/';
+		$temp   = 'temp/';
+		$path   = 'campaigns/updates/';
 
 	    $image = $sql->image;
 
@@ -746,7 +749,7 @@ class CampaignsController extends Controller
 		->where('user_id', Auth::user()->id)
 		->first();
 
-		$path = 'public/campaigns/updates/';
+		$path = 'campaigns/updates/';
 
 		$data = Updates::where('id', $this->request->id)->first();
 
