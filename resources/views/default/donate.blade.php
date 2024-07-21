@@ -349,6 +349,7 @@ function chargeDonation() {
  stripe.createPaymentMethod('card', cardElement, {
    billing_details: {name: cardholderName.value, email: cardholderEmail.value}
  }).then(function(result) {
+  console.log(result);
    if (result.error) {
 
      if(result.error.type == 'invalid_request_error') {

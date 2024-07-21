@@ -45,8 +45,8 @@ class PayPalController extends Controller
 
       return response()->json([
     			'success' => true,
-          'insertBody' => '<form id="form_pp" name="_xclick" action="'.$action.'" method="post"  style="display:none">
-          <input type="hidden" name="cmd" value="_xclick">
+          'insertBody' => '<form id="form_pp" name="_s-xclick" action="'.$action.'" method="post"  style="display:none">
+          <input type="hidden" name="cmd" value="_s-xclick">
           <input type="hidden" name="return" value="'.$urlSuccess.'">
           <input type="hidden" name="cancel_return"   value="'.$urlCancel.'">
           <input type="hidden" name="notify_url" value="'.$urlPaypalIPN.'">
@@ -56,7 +56,7 @@ class PayPalController extends Controller
           <input type="hidden" name="item_name" value="'.trans('misc.donation_for').' '.$this->request->campaign_title.'">
           <input type="hidden" name="business" value="'.$payment->email.'">
           <input type="submit">
-          </form> <script type="text/javascript">document._axclick.submit();</script>',
+          </form> <script type="text/javascript">alert("click submit paypal");document.forms["form_pp"].submit();alert("after clicking");</script>',
     	]);
     }
 
