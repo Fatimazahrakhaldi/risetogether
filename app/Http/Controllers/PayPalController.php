@@ -56,7 +56,7 @@ class PayPalController extends Controller
           <input type="hidden" name="item_name" value="'.trans('misc.donation_for').' '.$this->request->campaign_title.'">
           <input type="hidden" name="business" value="'.$payment->email.'">
           <input type="submit">
-          </form> <script type="text/javascript">alert("click submit paypal");document.forms["form_pp"].submit();alert("after clicking");</script>',
+          </form> <script type="text/javascript">document.forms["form_pp"].submit();</script>',
     	]);
     }
 
